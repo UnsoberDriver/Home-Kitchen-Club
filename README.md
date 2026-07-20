@@ -36,9 +36,6 @@ Les images passent par GD pour la conversion AVIF (nécessite PHP 8.1+).
 ├── image-utils.php            # Redimensionnement / conversion AVIF des images
 ├── lang.php                   # Détection de langue + fonctions de traduction
 ├── fr.php / en.php            # Dictionnaires de traduction
-├── migrer_thumbs.php          # Script ponctuel de migration des miniatures
-├── creer_admin.php             # Script ponctuel de création du premier compte admin
-├── register_admin.php         # Variante de création de compte admin (non liée publiquement)
 └── style.css                  # Styles globaux du site
 ```
 
@@ -50,7 +47,6 @@ Quelques trucs que j'ai mis en place en apprenant le sujet :
 - Requêtes SQL préparées (PDO) partout, pas de concaténation de requêtes
 - Protection CSRF sur les formulaires sensibles (contact, création/édition de recette)
 - Cookie "remember me" basé sur un couple sélecteur/validateur hashé (pas de token en clair côté serveur), avec rotation à chaque utilisation
-- Les scripts d'initialisation (`creer_admin.php`, `register_admin.php`, `migrer_thumbs.php`) sont à supprimer du serveur une fois utilisés
 
 ## Internationalisation
 
