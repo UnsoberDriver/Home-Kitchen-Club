@@ -52,12 +52,12 @@ Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch » (s
 - Cookie « remember me » basé sur un couple sélecteur/validateur hashé (pas de token en clair côté serveur), avec rotation à chaque utilisation
 - Scripts d'initialisation (`creer_admin.php`, `register_admin.php`, `migrer_thumbs.php`) à supprimer après usage
 
-🌍 Internationalisation
+## Internationalisation
 - Le site détecte automatiquement la langue du navigateur :
 
-- 🇫🇷 Français si le navigateur est en français
-- 🇬🇧 Anglais dans tous les autres cas
-- Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
+🇫🇷 Français si le navigateur est en français  
+🇬🇧 Anglais dans tous les autres cas  
+Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
 
 ## En ligne
 - URL du site : [https://Homekitchhenclub.net](https://homekitchenclub.alwaysdata.net/)
