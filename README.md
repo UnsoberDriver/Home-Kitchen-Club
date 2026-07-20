@@ -1,24 +1,21 @@
 # Home Kitchen Club
 
-Site web de recettes de cuisine développé en PHP natif, avec espace membre et back-office d'administration pour la gestion du contenu.  
-Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch », MySQL/PDO, et un peu de front léger (HTML/CSS/JS vanilla).
+Site de recettes que j'ai codé en PHP pur pour progresser en dev web (pas de framework, je voulais comprendre ce qui se passe sous le capot). Il y a un espace public pour consulter les recettes, un système de compte, et un dashboard admin pour tout gérer.
 
-## Fonctionnalités
+## Ce que ça fait
 
-- **Catalogue de recettes** filtrable par catégorie, avec fiches détaillées (ingrédients, étapes, temps, difficulté)
-- **Portions ajustables** en direct sur la fiche recette (recalcul des quantités en JS)
-- **Comptes utilisateurs** : inscription / connexion, avec option « rester connecté » (remember-me sécurisé par token)
-- **Espace administrateur** : tableau de bord pour créer, modifier et supprimer des recettes
-- **Upload d'images** avec redimensionnement et conversion automatique en AVIF (+ génération de miniatures)
-- **Formulaire de contact** (page dédiée + popup modale en AJAX), protégé par jeton CSRF
-- **Page mentions légales**
+- Liste de recettes filtrable par catégorie, avec fiche détaillée par recette (ingrédients, étapes, temps, difficulté)
+- Ajustement des portions en direct sur la fiche recette (recalcul des quantités en JS)
+- Comptes utilisateurs : inscription / connexion, avec option "rester connecté" (remember-me sécurisé par token)
+- Dashboard admin pour créer, modifier et supprimer des recettes
+- Upload d'images, converties automatiquement en AVIF + génération de miniatures
+- Formulaire de contact en popup (AJAX, protégé par jeton CSRF)
+- Site bilingue FR/EN, détecté automatiquement selon la langue du navigateur
 
-## Stack technique
+## Stack
 
-- PHP natif (pas de framework)
-- MySQL via PDO (requêtes préparées)
-- HTML / CSS / JavaScript vanilla (pas de dépendance front)
-- Images converties en AVIF via GD (`imageavif`, PHP ≥ 8.1)
+PHP natif, MySQL/PDO, HTML/CSS/JS vanilla. Pas de framework, pas de build tool.
+Les images passent par GD pour la conversion AVIF (nécessite PHP 8.1+).
 
 ## Structure du projet
 
@@ -37,6 +34,8 @@ Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch », M
 ├── mentions-legales.php       # Page légale
 ├── db.php                     # Connexion PDO + chargement du .env
 ├── image-utils.php            # Redimensionnement / conversion AVIF des images
+├── lang.php                   # Détection de langue + fonctions de traduction
+├── fr.php / en.php            # Dictionnaires de traduction
 ├── migrer_thumbs.php          # Script ponctuel de migration des miniatures
 ├── creer_admin.php             # Script ponctuel de création du premier compte admin
 ├── register_admin.php         # Variante de création de compte admin (non liée publiquement)
@@ -45,31 +44,27 @@ Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch », M
 
 ## Sécurité
 
+Quelques trucs que j'ai mis en place en apprenant le sujet :
+
 - Mots de passe hashés avec `password_hash` / `password_verify`
-- Requêtes SQL préparées (PDO) partout
+- Requêtes SQL préparées (PDO) partout, pas de concaténation de requêtes
 - Protection CSRF sur les formulaires sensibles (contact, création/édition de recette)
-- Cookie « remember me » basé sur un couple sélecteur/validateur hashé (pas de token en clair côté serveur), avec rotation à chaque utilisation
-- Scripts d'initialisation (`creer_admin.php`, `register_admin.php`, `migrer_thumbs.php`) à supprimer après usage
+- Cookie "remember me" basé sur un couple sélecteur/validateur hashé (pas de token en clair côté serveur), avec rotation à chaque utilisation
+- Les scripts d'initialisation (`creer_admin.php`, `register_admin.php`, `migrer_thumbs.php`) sont à supprimer du serveur une fois utilisés
 
 ## Internationalisation
-Le site détecte automatiquement la langue du navigateur :
 
-- 🇫🇷 Français si le navigateur est en français
-- 🇬🇧 Anglais dans tous les autres cas
-
-Les traductions sont gérées via `fr.php` / `en.php` et la fonction `lang.php`
+Le site détecte la langue du navigateur au premier chargement et affiche le contenu en français ou en anglais en conséquence. La logique est dans `lang.php`, les textes fixes dans `fr.php` / `en.php`, et les recettes ont des colonnes `_en` en base avec repli automatique sur le français si la traduction n'est pas encore renseignée.
 
 ## En ligne
-- URL du site : [https://Homekitchhenclub.net](https://homekitchenclub.alwaysdata.net/)
 
-## Pages légales
+- Site : [homekitchenclub.alwaysdata.net](https://homekitchenclub.alwaysdata.net/)
 - [Mentions légales](https://homekitchenclub.alwaysdata.net/mentions-legales)
 
 ## Auteur
-- [LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
+
+Nicolas Boulloud — [LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
 
 ## Licence
 
-© 2026 Nicolas boulloudl. Tous droits réservés.
-
-
+© 2026 Nicolas Boulloud. Tous droits réservés.
