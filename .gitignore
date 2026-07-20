@@ -1,0 +1,10 @@
+.env
+uploads/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+vendor/
+composer.lock
+*.log
