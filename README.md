@@ -66,7 +66,6 @@ Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
 - [Mentions légales](https://homekitchenclub.alwaysdata.net/mentions-legales)
 
 ## Auteur
-- Nicolas Boulloud
 - [LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
 
 ## Licence
