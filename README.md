@@ -53,10 +53,11 @@ Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch » (s
 - Scripts d'initialisation (`creer_admin.php`, `register_admin.php`, `migrer_thumbs.php`) à supprimer après usage
 
 ## Internationalisation
-- Le site détecte automatiquement la langue du navigateur :
+Le site détecte automatiquement la langue du navigateur :
 
-🇫🇷 Français si le navigateur est en français  
-🇬🇧 Anglais dans tous les autres cas  
+- 🇫🇷 Français si le navigateur est en français
+- 🇬🇧 Anglais dans tous les autres cas
+- 
 Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
 
 ## En ligne
