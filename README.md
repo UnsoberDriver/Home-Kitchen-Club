@@ -20,23 +20,43 @@ Les images passent par GD pour la conversion AVIF (nécessite PHP 8.1+).
 ## Structure du projet
 
 ```
-.
-├── index.php                # Page d'accueil (liste des recettes, filtres par catégorie)
-├── recette.php               # Fiche détail d'une recette
-├── login.php / register.php  # Connexion / inscription
-├── logout.php                # Déconnexion
-├── auth_check.php            # Middleware d'authentification pour les pages admin
-├── dashboard.php              # Back-office : liste/édition rapide des recettes
-├── ajouter.php                # Back-office : création d'une recette
-├── modifier.php               # Back-office : édition complète d'une recette
-├── contact.php                # Page de contact
-├── contact_envoyer.php        # Endpoint AJAX du formulaire de contact
-├── mentions-legales.php       # Page légale
-├── db.php                     # Connexion PDO + chargement du .env
-├── image-utils.php            # Redimensionnement / conversion AVIF des images
-├── lang.php                   # Détection de langue + fonctions de traduction
-├── fr.php / en.php            # Dictionnaires de traduction
-└── style.css                  # Styles globaux du site
+homekitchenclub/
+├── public/                  # Racine web (document root)
+│   ├── index.php            # Page d'accueil (liste des recettes)
+│   ├── recette.php          # Détail d'une recette
+│   ├── contact.php          # Formulaire de contact
+│   ├── contact_envoyer.php  # Traitement du formulaire de contact
+│   ├── mentions-legales.php
+│   ├── .htaccess
+│   ├── logo.png
+│   └── logo-navbar.svg
+│
+├── admin/                   # Gestion des recettes (espace connecté)
+│   ├── dashboard.php
+│   ├── ajouter.php
+│   └── modifier.php
+│
+├── utilisateur/             # Authentification
+│   ├── login.php
+│   ├── register.php
+│   └── logout.php
+│
+├── includes/                # Logique métier / technique (non accessible en URL directe)
+│   ├── db.php                # Connexion PDO à la base de données
+│   ├── lang.php              # Gestion de la langue (fr/en)
+│   ├── auth_check.php        # Vérification de session utilisateur
+│   └── image-utils.php       # Traitement / redimensionnement des images
+│
+├── lang/                    # Fichiers de traduction
+│   ├── fr.php
+│   └── en.php
+│
+├── assets/
+│   └── css/
+│       └── style.css
+│
+└── uploads/                 # Images uploadées par les utilisateurs
+    └── recettes/
 ```
 
 ## Sécurité
