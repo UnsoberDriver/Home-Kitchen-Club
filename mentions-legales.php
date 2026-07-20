@@ -1,22 +1,16 @@
 <?php
-/**
- * mentions-legales.php — page légale publique
- * Pensez à remplacer les champs [entre crochets] par vos informations réelles.
- */
+require_once __DIR__ . '/lang.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $lang ?>">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentions légales — Home Kitchen Club</title>
+<title><?= __('mentions_titre') ?> — Home Kitchen Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -36,7 +30,8 @@ if (empty($_SESSION['csrf'])) {
   .legal p{line-height:1.7;margin:0 0 14px}
   .legal ul{line-height:1.7;margin:0 0 14px;padding-left:20px}
   .legal a{color:var(--tomato);text-decoration:underline}
-  .legal .placeholder{background:#fff3cd;padding:0 4px;border-radius:3px}
+  .legal a.email-link{color:inherit;text-decoration:none}
+  .legal a.email-link:hover{text-decoration:underline}
 
   .contact-modal{border:2px solid var(--ink);border-radius:8px;padding:0;max-width:440px;width:90%}
   .contact-modal::backdrop{background:rgba(30,42,31,.55)}
@@ -61,26 +56,28 @@ if (empty($_SESSION['csrf'])) {
 
 <header class="site-header">
   <div class="wrap">
-    <a href="index" class="logo"><span class="dot"></span> Home Kitchen Club</a>
+    <a href="index" class="logo"><img src="logo-navbar.svg" alt="Home Kitchen Club"></a>
   </div>
 </header>
 
 <div class="legal">
-  <h1>Mentions légales</h1>
-  <p class="updated">Dernière mise à jour : <?= date('d/m/Y') ?></p>
+  <h1><?= __('mentions_titre') ?></h1>
+  <p class="updated"><?= __('mentions_maj') ?> : <?= date('d/m/Y') ?></p>
+
+<?php if ($lang === 'fr'): ?>
 
   <h2>1. Éditeur du site</h2>
   <p>
-    Le présent site, accessible à l'adresse <strong>[nom de domaine, ex : homekitchenclub.fr]</strong>,
+    Le présent site, accessible à l'adresse <strong>https://homekitchenclub.alwaysdata.net</strong>,
     est édité par :
   </p>
   <ul>
-    <li>Nom / Raison sociale : <span class="placeholder">[Nom ou raison sociale]</span></li>
-    <li>Statut : <span class="placeholder">[particulier / auto-entrepreneur / société — préciser forme juridique]</span></li>
-    <li>Adresse : <span class="placeholder">[Adresse postale complète]</span></li>
-    <li>SIRET / SIREN : <span class="placeholder">[si applicable]</span></li>
-    <li>Email de contact : <span class="placeholder">[email de contact]</span></li>
-    <li>Directeur de la publication : <span class="placeholder">[Nom du responsable de publication]</span></li>
+    <li>Nom / Raison sociale : <span>Boulloud Nicolas</span></li>
+    <li>Statut : <span>Particulier</span></li>
+    <li>Adresse : <span>65000</span></li>
+    <li>SIRET / SIREN : <span>non applicable (site personnel)</span></li>
+    <li>Email de contact : <a class="email-link" href="mailto:boulloud.nicolas@gmail.com">boulloud.nicolas@gmail.com</a></li>
+    <li>Directeur de la publication : <span>Boulloud Nicolas</span></li>
   </ul>
 
   <h2>2. Hébergement</h2>
@@ -92,9 +89,6 @@ if (empty($_SESSION['csrf'])) {
     <li>Adresse : 91 rue du Faubourg Saint-Honoré, 75008 Paris, France</li>
     <li>Site web : <a href="https://www.alwaysdata.com" target="_blank" rel="noopener">www.alwaysdata.com</a></li>
   </ul>
-  <p style="font-size:.85rem;color:#888">
-    (Vérifiez ces coordonnées auprès de votre hébergeur réel avant publication.)
-  </p>
 
   <h2>3. Propriété intellectuelle</h2>
   <p>
@@ -115,7 +109,7 @@ if (empty($_SESSION['csrf'])) {
     Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi
     « Informatique et Libertés », vous disposez d'un droit d'accès, de rectification, de
     suppression et de portabilité de vos données. Pour exercer ce droit, contactez-nous à
-    l'adresse : <span class="placeholder">[email de contact RGPD]</span>.
+    l'adresse : <a class="email-link" href="mailto:boulloud.nicolas@gmail.com">boulloud.nicolas@gmail.com</a>.
   </p>
 
   <h2>5. Cookies</h2>
@@ -141,17 +135,92 @@ if (empty($_SESSION['csrf'])) {
   <h2>8. Contact</h2>
   <p>
     Pour toute question relative au site ou aux présentes mentions légales, vous pouvez nous
-    contacter à l'adresse : <span class="placeholder">[email de contact]</span>.
+    contacter à l'adresse : <a class="email-link" href="mailto:boulloud.nicolas@gmail.com">boulloud.nicolas@gmail.com</a>.
   </p>
+
+  <?php else: ?>
+
+  <h2>1. Site publisher</h2>
+  <p>
+    This site, available at <strong>https://homekitchenclub.alwaysdata.net</strong>,
+    is published by:
+  </p>
+  <ul>
+    <li>Name: <span>Boulloud Nicolas</span></li>
+    <li>Status: <span>Individual</span></li>
+    <li>Address: <span>65000 Tarbes, France</span></li>
+    <li>Business registration number: <span>not applicable (personal site)</span></li>
+    <li>Contact email: <a class="email-link" href="mailto:boulloud.nicolas@gmail.com">boulloud.nicolas@gmail.com</a></li>
+    <li>Publication director: <span>Boulloud Nicolas</span></li>
+  </ul>
+
+  <h2>2. Hosting</h2>
+  <p>
+    This site is hosted by:
+  </p>
+  <ul>
+    <li>Host: Alwaysdata SAS</li>
+    <li>Address: 91 rue du Faubourg Saint-Honoré, 75008 Paris, France</li>
+    <li>Website: <a href="https://www.alwaysdata.com" target="_blank" rel="noopener">www.alwaysdata.com</a></li>
+  </ul>
+
+  <h2>3. Intellectual property</h2>
+  <p>
+    All content on this site (text, recipes, photographs, logos, layout) is protected by
+    copyright unless stated otherwise. Any reproduction, representation, modification, or
+    distribution, in whole or in part, without the publisher's prior authorization is
+    prohibited and may constitute infringement.
+  </p>
+
+  <h2>4. Personal data</h2>
+  <p>
+    This site collects certain personal data when creating a user account (name, email,
+    password) and when subscribing to the newsletter. This data is used solely for the
+    site's operation (login, account management, newsletter delivery) and is never sold
+    or shared with third parties for commercial purposes.
+  </p>
+  <p>
+    Under the General Data Protection Regulation (GDPR), you have the right to access,
+    correct, delete, and port your data. To exercise this right, contact us at:
+    <a class="email-link" href="mailto:boulloud.nicolas@gmail.com">boulloud.nicolas@gmail.com</a>.
+  </p>
+
+  <h2>5. Cookies</h2>
+  <p>
+    This site may use technical cookies necessary for its operation (in particular, to
+    maintain your login session). No advertising or third-party tracking cookies are set
+    without your prior consent, where applicable.
+  </p>
+
+  <h2>6. Limitation of liability</h2>
+  <p>
+    The publisher strives to ensure the accuracy of the information published on the site
+    (in particular recipes and preparation times) but cannot be held liable for errors,
+    omissions, or temporary unavailability of the site.
+  </p>
+
+  <h2>7. Governing law</h2>
+  <p>
+    This legal notice is governed by French law. In the event of a dispute, and failing
+    an amicable resolution, French courts shall have sole jurisdiction.
+  </p>
+
+  <h2>8. Contact</h2>
+  <p>
+    For any questions regarding the site or this legal notice, you can contact us at:
+    <a class="email-link" href="mailto:boulloud.nicolas@gmail.com">boulloud.nicolas@gmail.com</a>.
+  </p>
+
+  <?php endif; ?>
 </div>
 
 <footer>
   <div class="wrap">
     <span>© <?= date('Y') ?> Home Kitchen Club</span>
     <div style="display:flex;gap:20px;align-items:center">
-      <button type="button" onclick="document.getElementById('contact-modal').showModal()" style="background:none;border:none;color:inherit;text-decoration:none;cursor:pointer;font:inherit;padding:0">Nous contacter</button>
+      <button type="button" onclick="document.getElementById('contact-modal').showModal()" style="background:none;border:none;color:inherit;text-decoration:none;cursor:pointer;font:inherit;padding:0"><?= __('footer_contact') ?></button>
       <span style="opacity:.5">·</span>
-      <a href="mentions-legales" style="text-decoration:none">Mentions légales</a>
+      <a href="mentions-legales" style="text-decoration:none"><?= __('footer_mentions') ?></a>
     </div>
   </div>
 </footer>
@@ -159,29 +228,29 @@ if (empty($_SESSION['csrf'])) {
 <dialog id="contact-modal" class="contact-modal">
   <button type="button" class="cm-close" onclick="document.getElementById('contact-modal').close()" aria-label="Fermer">&times;</button>
   <div class="cm-inner">
-    <h2>Nous contacter</h2>
-    <p class="intro">Une question, une suggestion de recette, un problème sur le site ? Écrivez-nous.</p>
+    <h2><?= __('contact_titre') ?></h2>
+    <p class="intro"><?= __('contact_intro') ?></p>
 
     <div id="contact-cm-msg"></div>
 
     <form id="contact-form">
       <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf']) ?>">
 
-      <label for="cm-nom">Nom</label>
-      <input type="text" id="cm-nom" name="nom" placeholder="Votre nom">
+      <label for="cm-nom"><?= __('contact_nom') ?></label>
+      <input type="text" id="cm-nom" name="nom" placeholder="<?= __('contact_nom') ?>">
 
-      <label for="cm-email">Email</label>
+      <label for="cm-email"><?= __('contact_email') ?></label>
       <input type="email" id="cm-email" name="email" required>
 
-      <label for="cm-sujet">Sujet</label>
-      <input type="text" id="cm-sujet" name="sujet" placeholder="Objet de votre message">
+      <label for="cm-sujet"><?= __('contact_sujet') ?></label>
+      <input type="text" id="cm-sujet" name="sujet" placeholder="<?= __('contact_sujet') ?>">
 
-      <label for="cm-message">Message</label>
+      <label for="cm-message"><?= __('contact_message') ?></label>
       <textarea id="cm-message" name="message" required maxlength="5000"></textarea>
 
       <div class="cm-actions">
-        <button type="button" class="btn-annuler" onclick="document.getElementById('contact-modal').close()">Annuler</button>
-        <button type="submit" class="btn-envoyer">Envoyer</button>
+        <button type="button" class="btn-annuler" onclick="document.getElementById('contact-modal').close()"><?= __('contact_annuler') ?></button>
+        <button type="submit" class="btn-envoyer"><?= __('contact_envoyer') ?></button>
       </div>
     </form>
   </div>

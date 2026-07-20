@@ -1,20 +1,18 @@
 <?php
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/lang.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
 }
 
-$categories = $pdo->query("SELECT id, nom FROM categories ORDER BY ordre")->fetchAll();
+$categories = $pdo->query("SELECT id, nom, nom_en FROM categories ORDER BY ordre")->fetchAll();
 
 $categorie_active = isset($_GET['categorie']) ? (int) $_GET['categorie'] : 0;
 
 if ($categorie_active > 0) {
     $stmtR = $pdo->prepare("
-        SELECT r.id, r.titre, r.intro, r.temps_total, r.difficulte, r.nouveau, r.image_url, c.nom AS cat
+        SELECT r.id, r.titre, r.titre_en, r.intro, r.temps_total, r.difficulte, r.difficulte_en, r.nouveau, r.image_url, c.nom AS cat, c.nom_en AS cat_en
         FROM recettes r
         JOIN categories c ON c.id = r.categorie_id
         WHERE r.publie = 1 AND r.categorie_id = ?
@@ -24,7 +22,7 @@ if ($categorie_active > 0) {
     $recettes = $stmtR->fetchAll();
 } else {
     $recettes = $pdo->query("
-        SELECT r.id, r.titre, r.intro, r.temps_total, r.difficulte, r.nouveau, r.image_url, c.nom AS cat
+        SELECT r.id, r.titre, r.titre_en, r.intro, r.temps_total, r.difficulte, r.difficulte_en, r.nouveau, r.image_url, c.nom AS cat, c.nom_en AS cat_en
         FROM recettes r
         JOIN categories c ON c.id = r.categorie_id
         WHERE r.publie = 1
@@ -33,11 +31,11 @@ if ($categorie_active > 0) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= $lang ?>">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Kitchen Club — Recettes de saison</title>
+<title>Home Kitchen Club — <?= $lang === 'fr' ? 'Recettes de saison' : 'Seasonal recipes' ?></title>
 <link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,15 +130,15 @@ if ($categorie_active > 0) {
     <nav class="main-nav">
     </nav>
     <details class="profile-menu">
-      <summary aria-label="Compte">
+      <summary aria-label="<?= __('nav_compte') ?>">
         <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"></path>
         </svg>
       </summary>
       <div class="profile-dropdown">
-        <a href="login">Connexion</a>
-        <a href="register">Inscription</a>
+        <a href="login"><?= __('nav_connexion') ?></a>
+        <a href="register"><?= __('nav_inscription') ?></a>
       </div>
     </details>
   </div>
@@ -148,10 +146,10 @@ if ($categorie_active > 0) {
 
 <div class="cat-strip">
   <div class="wrap">
-    <a href="index" class="<?= $categorie_active === 0 ? 'active' : '' ?>">Toutes</a>
+    <a href="index" class="<?= $categorie_active === 0 ? 'active' : '' ?>"><?= __('nav_toutes') ?></a>
     <?php foreach ($categories as $c): ?>
       <a href="index?categorie=<?= $c['id'] ?>" class="<?= $categorie_active === (int) $c['id'] ? 'active' : '' ?>">
-        <?= htmlspecialchars($c['nom']) ?>
+        <?= htmlspecialchars(champ_langue($c, 'nom')) ?>
       </a>
     <?php endforeach; ?>
   </div>
@@ -160,19 +158,19 @@ if ($categorie_active > 0) {
 <section class="section" id="recettes">
   <div class="wrap">
     <div class="section-head">
-      <h2><?= $categorie_active > 0 ? htmlspecialchars(array_values(array_filter($categories, fn($c) => (int) $c['id'] === $categorie_active))[0]['nom'] ?? 'Recettes') : 'Dernières recettes' ?></h2>
-      <span class="num"><?= count($recettes) ?> résultats</span>
+      <h2><?= $categorie_active > 0 ? htmlspecialchars(champ_langue(array_values(array_filter($categories, fn($c) => (int) $c['id'] === $categorie_active))[0] ?? ['nom' => __('accueil_titre')], 'nom')) : __('accueil_titre') ?></h2>
+      <span class="num"><?= count($recettes) ?> <?= __('accueil_resultats') ?></span>
     </div>
     <div class="grid">
       <?php foreach ($recettes as $i => $r): ?>
         <a class="card" href="recette?id=<?= $r['id'] ?>">
-          <?php if (!empty($r['nouveau'])): ?><span class="badge">Nouveau</span><?php endif; ?>
+          <?php if (!empty($r['nouveau'])): ?><span class="badge"><?= $lang === 'fr' ? 'Nouveau' : 'New' ?></span><?php endif; ?>
           <div class="thumb">
             <?php if (!empty($r['image_url'])):
               $thumb_url = preg_replace('/\.avif$/', '_thumb.avif', $r['image_url']);
               $is_first = $i === 0;
             ?>
-              <img src="uploads/<?= htmlspecialchars($thumb_url) ?>" alt="<?= htmlspecialchars($r['titre']) ?>"
+              <img src="uploads/<?= htmlspecialchars($thumb_url) ?>" alt="<?= htmlspecialchars(champ_langue($r, 'titre')) ?>"
                 <?= $is_first ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"' ?>
                 decoding="async" style="width:100%;height:100%;object-fit:cover">
             <?php else: ?>
@@ -180,13 +178,13 @@ if ($categorie_active > 0) {
             <?php endif; ?>
           </div>
           <div class="body">
-            <span class="tag"><?= htmlspecialchars($r['cat']) ?></span>
-            <h3><?= htmlspecialchars($r['titre']) ?></h3>
+            <span class="tag"><?= htmlspecialchars(champ_langue($r, 'cat')) ?></span>
+            <h3><?= htmlspecialchars(champ_langue($r, 'titre')) ?></h3>
           </div>
         </a>
       <?php endforeach; ?>
       <?php if (!$recettes): ?>
-        <p style="color:#888">Aucune recette pour le moment.</p>
+        <p style="color:#888"><?= __('accueil_aucune_recette') ?></p>
       <?php endif; ?>
     </div>
     <?php if ($recettes): ?>
@@ -196,7 +194,7 @@ if ($categorie_active > 0) {
             <path d="M12 19V5"></path>
             <path d="M6 11l6-6 6 6"></path>
           </svg>
-          Remonter en haut
+          <?= __('accueil_remonter') ?>
         </button>
       </div>
     <?php endif; ?>
@@ -207,9 +205,9 @@ if ($categorie_active > 0) {
   <div class="wrap">
     <span>© <?= date('Y') ?> Home Kitchen Club</span>
     <div style="display:flex;gap:20px;align-items:center">
-      <button type="button" onclick="document.getElementById('contact-modal').showModal()" style="background:none;border:none;color:inherit;text-decoration:none;cursor:pointer;font:inherit;padding:0">Nous contacter</button>
+      <button type="button" onclick="document.getElementById('contact-modal').showModal()" style="background:none;border:none;color:inherit;text-decoration:none;cursor:pointer;font:inherit;padding:0"><?= __('footer_contact') ?></button>
       <span style="opacity:.5">·</span>
-      <a href="mentions-legales" style="text-decoration:none">Mentions légales</a>
+      <a href="mentions-legales" style="text-decoration:none"><?= __('footer_mentions') ?></a>
     </div>
   </div>
 </footer>
@@ -217,29 +215,29 @@ if ($categorie_active > 0) {
 <dialog id="contact-modal" class="contact-modal">
   <button type="button" class="cm-close" onclick="document.getElementById('contact-modal').close()" aria-label="Fermer">&times;</button>
   <div class="cm-inner">
-    <h2>Nous contacter</h2>
-    <p class="intro">Une question, une suggestion de recette, un problème sur le site ? Écrivez-nous.</p>
+    <h2><?= __('contact_titre') ?></h2>
+    <p class="intro"><?= __('contact_intro') ?></p>
 
     <div id="contact-cm-msg"></div>
 
     <form id="contact-form">
       <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf']) ?>">
 
-      <label for="cm-nom">Nom</label>
-      <input type="text" id="cm-nom" name="nom" placeholder="Votre nom">
+      <label for="cm-nom"><?= __('contact_nom') ?></label>
+      <input type="text" id="cm-nom" name="nom" placeholder="<?= __('contact_nom') ?>">
 
-      <label for="cm-email">Email</label>
+      <label for="cm-email"><?= __('contact_email') ?></label>
       <input type="email" id="cm-email" name="email" required>
 
-      <label for="cm-sujet">Sujet</label>
-      <input type="text" id="cm-sujet" name="sujet" placeholder="Objet de votre message">
+      <label for="cm-sujet"><?= __('contact_sujet') ?></label>
+      <input type="text" id="cm-sujet" name="sujet" placeholder="<?= __('contact_sujet') ?>">
 
-      <label for="cm-message">Message</label>
+      <label for="cm-message"><?= __('contact_message') ?></label>
       <textarea id="cm-message" name="message" required maxlength="5000"></textarea>
 
       <div class="cm-actions">
-        <button type="button" class="btn-annuler" onclick="document.getElementById('contact-modal').close()">Annuler</button>
-        <button type="submit" class="btn-envoyer">Envoyer</button>
+        <button type="button" class="btn-annuler" onclick="document.getElementById('contact-modal').close()"><?= __('contact_annuler') ?></button>
+        <button type="submit" class="btn-envoyer"><?= __('contact_envoyer') ?></button>
       </div>
     </form>
   </div>
