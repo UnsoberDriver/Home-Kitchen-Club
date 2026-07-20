@@ -52,12 +52,22 @@ Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch » (s
 - Cookie « remember me » basé sur un couple sélecteur/validateur hashé (pas de token en clair côté serveur), avec rotation à chaque utilisation
 - Scripts d'initialisation (`creer_admin.php`, `register_admin.php`, `migrer_thumbs.php`) à supprimer après usage
 
-## À faire / idées d'amélioration
+🌍 Internationalisation
+Le site détecte automatiquement la langue du navigateur :
 
-- Migrer vers un framework léger ou au moins un routeur
-- Ajouter des tests automatisés
-- Système de favoris / notes utilisateurs sur les recettes
-- Pagination sur la liste des recettes
+🇫🇷 Français si le navigateur est en français
+🇬🇧 Anglais dans tous les autres cas
+Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
+
+## En ligne
+URL du site : [https://Homekitchhenclub.net](https://homekitchenclub.alwaysdata.net/)
+
+## Pages légales
+Mentions légales
+
+## Auteur
+Nicolas Boulloud
+[LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
 
 ## Licence
 
