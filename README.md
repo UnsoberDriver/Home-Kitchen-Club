@@ -57,7 +57,7 @@ Le site détecte automatiquement la langue du navigateur :
 
 - 🇫🇷 Français si le navigateur est en français
 - 🇬🇧 Anglais dans tous les autres cas
-- 
+
 Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
 
 ## En ligne
