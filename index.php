@@ -65,7 +65,7 @@ if ($categorie_active > 0) {
   footer{margin-top:auto}
 
   .site-header{border-bottom:2px solid var(--ink);position:sticky;top:0;background:var(--ink);color:var(--paper);z-index:50}
-  .site-header .wrap{display:flex;align-items:center;justify-content:flex-start;padding-top:18px;padding-bottom:18px}
+  .site-header .wrap{display:flex;align-items:center;justify-content:flex-start;padding-top:10px;padding-bottom:10px}
   .logo{font-family:var(--font-display);font-size:1.6rem;font-weight:600;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px}
   .logo .dot{width:10px;height:10px;border-radius:50%;background:var(--tomato);display:inline-block}
   .burger-btn{display:none;background:none;border:none;width:38px;height:38px;align-items:center;justify-content:center;color:var(--paper);cursor:pointer;flex-shrink:0;margin-left:-10px}
@@ -76,10 +76,10 @@ if ($categorie_active > 0) {
   .profile-menu summary::-webkit-details-marker{display:none}
   .profile-menu summary svg{width:20px;height:20px;stroke:currentColor;fill:none}
 
-  .cat-strip{border-bottom:2px solid var(--ink);background:var(--ink)}
-  .cat-strip .wrap{display:flex;gap:8px;overflow-x:auto;justify-content:center}
-  .cat-strip a{color:var(--paper);padding:14px 22px;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;border-right:1px solid rgba(241,234,218,.2);font-family:var(--font-mono)}
-  .cat-strip a.active{background:var(--paper);color:var(--ink)}
+  .cat-strip{border-bottom:2px solid var(--ink);border-top:1px solid rgba(241,234,218,.2);background:var(--ink)}
+  .cat-strip .wrap{display:flex;gap:0;overflow-x:auto;justify-content:center;align-items:stretch}
+  .cat-strip a{color:var(--paper);padding:14px 22px;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;border-right:1px solid rgba(241,234,218,.2);font-family:var(--font-mono);display:flex;align-items:center;justify-content:center}
+  .cat-strip a.active{color:var(--paper)}
 
   @media (max-width:860px){
     nav.main-nav{display:none}
@@ -98,7 +98,6 @@ if ($categorie_active > 0) {
     footer .wrap > div{justify-content:center;width:100%}
   }
 
-  .cat-strip a.active{background:var(--ink);color:var(--paper)}
 
   .contact-modal{border:2px solid var(--ink);border-radius:8px;padding:0;max-width:440px;width:90%}
   .contact-modal::backdrop{background:rgba(30,42,31,.55)}

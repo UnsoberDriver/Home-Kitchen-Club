@@ -144,15 +144,17 @@ nav.main-nav a:hover{color:var(--tomato)}
 .hero-stamp-inner span{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
 
 /* CATEGORY STRIP */
-.cat-strip{border-bottom:2px solid var(--ink);background:var(--ink);}
-.cat-strip .wrap{display:flex;gap:8px;overflow-x:auto;justify-content:center}
+.cat-strip{border-bottom:2px solid var(--ink);border-top:1px solid rgba(241,234,218,.2);background:var(--ink);}
+.cat-strip .wrap{display:flex;gap:0;overflow-x:auto;justify-content:center;align-items:stretch}
 .cat-strip a:last-child{border-right:none}
 .cat-strip a{
   color:var(--paper);padding:14px 22px;font-size:.85rem;text-transform:uppercase;
   letter-spacing:.08em;white-space:nowrap;border-right:1px solid rgba(241,234,218,.2);
   font-family:var(--font-mono);
+  display:flex;align-items:center;justify-content:center;
 }
 .cat-strip a:hover{background:var(--tomato)}
+.cat-strip a.active{color:var(--paper)}
 
 /* SECTION HEADS */
 .section{padding:56px 0}
