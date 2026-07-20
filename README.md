@@ -63,11 +63,11 @@ Les traductions sont gérées via lib/translations.ts et le hook useLanguage().
 URL du site : [https://Homekitchhenclub.net](https://homekitchenclub.alwaysdata.net/)
 
 ## Pages légales
-Mentions légales
+[Mentions légales](https://homekitchenclub.alwaysdata.net/mentions-legales)
 
 ## Auteur
-Nicolas Boulloud
-[LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
+- Nicolas Boulloud
+- [LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
 
 ## Licence
 
