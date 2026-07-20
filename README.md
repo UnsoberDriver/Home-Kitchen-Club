@@ -1,8 +1,9 @@
 # Home Kitchen Club
 
+## A propos
 Site web de recettes de cuisine développé en PHP natif, avec espace membre et back-office d'administration pour la gestion du contenu.
 
-Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch » (sans framework), MySQL/PDO, et un peu de front léger (HTML/CSS/JS vanilla).
+Projet personnel réalisé pour apprendre/pratiquer le PHP « from scratch », MySQL/PDO, et un peu de front léger (HTML/CSS/JS vanilla).
 
 ## Fonctionnalités
 
