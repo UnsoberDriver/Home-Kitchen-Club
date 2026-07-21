@@ -50,15 +50,12 @@ homekitchenclub/
 │   └── image.php              # Proxy sécurisé pour servir les images du dossier uploads/
 │
 ├── uploads/                   # Images des recettes (hors document root, non accessible directement)
-│   ├── recette_xxx.avif           # Image originale
-│   └── recette_xxx_thumb.avif     # Miniature associée
+│   └── images.avif            # Miniature associée
 │
-├── utilisateur/                # Gestion des comptes utilisateurs
-│   ├── login.php
-│   ├── logout.php
-│   └── register.php
-│
-└── IUT/                        # (dossier annexe, hors périmètre du site)
+└── utilisateur/                # Gestion des comptes utilisateurs
+    ├── login.php
+    ├── logout.php
+    └── register.php
 ```
 
 ## Security
