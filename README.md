@@ -19,43 +19,44 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 ## Project structure
 
 ```
-homekitchenclub/
-│
-├── admin/                     # Back-office d'administration
-│   ├── ajouter.php            # Ajout d'une nouvelle recette
-│   ├── dashboard.php          # Tableau de bord admin
-│   └── modifier.php           # Modification d'une recette existante
-│
-├── public/                    # Racine web (document root du serveur)
-│   ├── assets/
-│   │   └── style.css          # Feuille de style principale du site     
-│   │
-│   ├── includes/              # Fichiers PHP partagés (connexion DB, langues, etc.)
-│   │   ├── db.php             # Connexion à la base de données (PDO)
-│   │   └── lang.php           # Gestion de l'internationalisation (FR/EN)
-│   │
-│   ├── lang/                  # Fichiers de traduction
-│   │   ├── en.php             # traduction anglaise
-│   │   └── fr.php             # traduction française
-│   │
-│   ├── .htaccess              # Réécriture d'URL, sécurité, cache navigateur
-│   ├── logo.png               # Favicon / logo
-│   ├── logo-navbar.svg        # Logo affiché dans le header
-│   │
-│   ├── index.php              # Page d'accueil (liste des recettes)
-│   ├── recette.php            # Page détail d'une recette
-│   ├── contact.php            # Page de contact (formulaire)
-│   ├── contact_envoyer.php    # Traitement AJAX du formulaire de contact
-│   ├── mentions-legales.php   # Page mentions légales / CGU
-│   └── image.php              # Proxy sécurisé pour servir les images du dossier uploads/
+.env
+www/
 │
 ├── uploads/                   # Images des recettes (hors document root, non accessible directement)
 │   └── images.avif            # Miniature associée
 │
-└── utilisateur/                # Gestion des comptes utilisateurs
-    ├── login.php
-    ├── logout.php
-    └── register.php
+└── public/                    # Racine web (document root du serveur)
+    ├── assets/
+    │   └── style.css          # Feuille de style principale du site     
+    │
+    ├── includes/              # Fichiers PHP partagés (connexion DB, langues, etc.)
+    │   ├── db.php             # Connexion à la base de données (PDO)
+    │   └── lang.php           # Gestion de l'internationalisation (FR/EN)
+    │
+    ├── lang/                  # Fichiers de traduction
+    │   ├── en.php             # traduction anglaise
+    │   └── fr.php             # traduction française
+    │
+    ├── utilisateur/                # Gestion des comptes utilisateurs
+    │   ├── login.php
+    │   ├── logout.php
+    │   └── register.php
+    │
+    ├── .htaccess              # Réécriture d'URL, sécurité, cache navigateur
+    ├── logo.png               # Favicon / logo
+    ├── logo-navbar.svg        # Logo affiché dans le header
+    │
+    ├── admin/                     # Back-office d'administration
+    ├── ajouter.php            # Ajout d'une nouvelle recette
+    ├── dashboard.php          # Tableau de bord admin
+    └── modifier.php           # Modification d'une recette existante
+    │
+    ├── index.php              # Page d'accueil (liste des recettes)
+    ├── recette.php            # Page détail d'une recette
+    ├── contact.php            # Page de contact (formulaire)
+    ├── contact_envoyer.php    # Traitement AJAX du formulaire de contact
+    ├── mentions-legales.php   # Page mentions légales / CGU
+    └── image.php              # Proxy sécurisé pour servir les images du dossier uploads/
 ```
 
 ## Security
