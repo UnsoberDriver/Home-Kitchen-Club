@@ -21,7 +21,7 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 ```
 homekitchenclub/
 │
-├── admin/                     # "Back-office d'administration"
+├── admin/                     # Back-office d'administration
 │   ├── ajouter.php            # Ajout d'une nouvelle recette
 │   ├── dashboard.php          # Tableau de bord admin
 │   └── modifier.php           # Modification d'une recette existante
@@ -35,6 +35,8 @@ homekitchenclub/
 │   │   └── lang.php           # Gestion de l'internationalisation (FR/EN)
 │   │
 │   ├── lang/                  # Fichiers de traduction
+│   │   ├── en.php             # traduction anglaise
+│   │   └── fr.php             # traduction française
 │   │
 │   ├── .htaccess              # Réécriture d'URL, sécurité, cache navigateur
 │   ├── logo.png               # Favicon / logo
