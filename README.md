@@ -19,45 +19,44 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 ## Project structure
 
 ```
-.env
+.env                              # Environment variables (DB credentials, secrets) — never committed
 www/
 │
-├── uploads/                   # Images des recettes (hors document root, non accessible directement)
-│   └── images.avif            # Miniature associée
+├── uploads/                      # Recipe images (outside the document root, not directly accessible)
+│   └── images.avif               # Thumbnail image
 │
-└── public/                    # Racine web (document root du serveur)
+└── public/                       # Web root (server document root)
     ├── assets/
-    │   └── style.css          # Feuille de style principale du site     
+    │   └── style.css             # Main stylesheet
     │
-    ├── includes/              # Fichiers PHP partagés (connexion DB, langues, etc.)
-    │   ├── db.php             # Connexion à la base de données (PDO)
-    │   └── lang.php           # Gestion de l'internationalisation (FR/EN)
+    ├── includes/                 # Shared PHP files (DB connection, language handling, etc.)
+    │   ├── db.php                # Database connection (PDO)
+    │   └── lang.php              # Internationalization handling (FR/EN)
     │
-    ├── lang/                  # Fichiers de traduction
-    │   ├── en.php             # traduction anglaise
-    │   └── fr.php             # traduction française
+    ├── lang/                     # Translation files
+    │   ├── en.php                # English translations
+    │   └── fr.php                # French translations
     │
-    ├── utilisateur/                # Gestion des comptes utilisateurs
+    ├── utilisateur/              # User account management
     │   ├── login.php
     │   ├── logout.php
     │   └── register.php
     │
-    ├── admin/                     # Back-office d'administration
-    │   ├── ajouter.php            # Ajout d'une nouvelle recette
-    │   ├── dashboard.php          # Tableau de bord admin
-    │   └── modifier.php           # Modification d'une recette existante
+    ├── admin/                    # Admin back-office
+    │   ├── ajouter.php           # Add a new recipe
+    │   ├── dashboard.php         # Admin dashboard
+    │   └── modifier.php          # Edit an existing recipe
     │
-    ├── .htaccess              # Réécriture d'URL, sécurité, cache navigateur
-    ├── logo.png               # Favicon / logo
-    ├── logo-navbar.svg        # Logo affiché dans le header
-    ├── index.php              # Page d'accueil (liste des recettes)
-    ├── recette.php            # Page détail d'une recette
-    ├── contact.php            # Page de contact (formulaire)
-    ├── contact_envoyer.php    # Traitement AJAX du formulaire de contact
-    ├── mentions-legales.php   # Page mentions légales / CGU
-    └── image.php              # Proxy sécurisé pour servir les images du dossier uploads/
+    ├── .htaccess                 # URL rewriting, security, browser caching
+    ├── logo.png                  # Favicon / logo
+    ├── logo-navbar.svg           # Logo shown in the header
+    ├── index.php                 # Home page (recipe listing)
+    ├── recette.php               # Recipe detail page
+    ├── contact.php               # Contact page (form)
+    ├── contact_envoyer.php       # AJAX handler for the contact form
+    ├── mentions-legales.php      # Legal notice page
+    └── image.php                 # Secure proxy serving images from the uploads/ folder
 ```
-
 ## Security
 
 A few things I put in place while learning about the topic:
