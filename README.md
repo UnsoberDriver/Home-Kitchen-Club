@@ -37,7 +37,7 @@ www/
     │   ├── en.php                # English translations
     │   └── fr.php                # French translations
     │
-    ├── user/              # User account management
+    ├── user/                     # User account management
     │   ├── login.php
     │   ├── logout.php
     │   └── register.php
