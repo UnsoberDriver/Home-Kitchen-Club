@@ -21,15 +21,14 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 ```
 homekitchenclub/
 │
-├── admin/                     # Back-office d'administration
+├── admin/                     # "Back-office d'administration"
 │   ├── ajouter.php            # Ajout d'une nouvelle recette
 │   ├── dashboard.php          # Tableau de bord admin
 │   └── modifier.php           # Modification d'une recette existante
 │
 ├── public/                    # Racine web (document root du serveur)
 │   ├── assets/
-│   │   └── css/
-│   │       └── style.css      # Feuille de style principale du site
+│   │   └── style.css          # Feuille de style principale du site     
 │   │
 │   ├── includes/              # Fichiers PHP partagés (connexion DB, langues, etc.)
 │   │   ├── db.php             # Connexion à la base de données (PDO)
