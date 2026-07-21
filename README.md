@@ -47,9 +47,11 @@ www/
     │   ├── dashboard.php         # Admin dashboard
     │   └── modifier.php          # Edit an existing recipe
     │
+    ├── contact/                  # Admin back-office
+    │   ├── contact.php           # Add a new recipe
+    │   └── contact_envoyer.php   # Admin dashboard
+    │
     ├── .htaccess                 # URL rewriting, security, browser caching
-    ├── logo.png                  # Favicon / logo
-    ├── logo-navbar.svg           # Logo shown in the header
     ├── index.php                 # Home page (recipe listing)
     ├── recette.php               # Recipe detail page
     ├── contact.php               # Contact page (form)
