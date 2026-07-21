@@ -20,43 +20,44 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 
 ```
 homekitchenclub/
-├── public/                  # Web root (document root)
-│   ├── index.php            # Home page (recipe list)
-│   ├── recette.php          # Recipe detail page
-│   ├── contact.php          # Contact form
-│   ├── contact_envoyer.php  # Contact form handler
-│   ├── mentions-legales.php
-│   ├── .htaccess
-│   ├── logo.png
-│   └── logo-navbar.svg
 │
-├── admin/                   # Recipe management (logged-in area)
-│   ├── dashboard.php
-│   ├── ajouter.php
-│   └── modifier.php
+├── admin/                     # Back-office d'administration
+│   ├── ajouter.php            # Ajout d'une nouvelle recette
+│   ├── dashboard.php          # Tableau de bord admin
+│   └── modifier.php           # Modification d'une recette existante
 │
-├── utilisateur/             # Authentication
+├── public/                    # Racine web (document root du serveur)
+│   ├── assets/
+│   │   └── css/
+│   │       └── style.css      # Feuille de style principale du site
+│   │
+│   ├── includes/              # Fichiers PHP partagés (connexion DB, langues, etc.)
+│   │   ├── db.php             # Connexion à la base de données (PDO)
+│   │   └── lang.php           # Gestion de l'internationalisation (FR/EN)
+│   │
+│   ├── lang/                  # Fichiers de traduction
+│   │
+│   ├── .htaccess              # Réécriture d'URL, sécurité, cache navigateur
+│   ├── logo.png               # Favicon / logo
+│   ├── logo-navbar.svg        # Logo affiché dans le header
+│   │
+│   ├── index.php              # Page d'accueil (liste des recettes)
+│   ├── recette.php            # Page détail d'une recette
+│   ├── contact.php            # Page de contact (formulaire)
+│   ├── contact_envoyer.php    # Traitement AJAX du formulaire de contact
+│   ├── mentions-legales.php   # Page mentions légales / CGU
+│   └── image.php              # Proxy sécurisé pour servir les images du dossier uploads/
+│
+├── uploads/                   # Images des recettes (hors document root, non accessible directement)
+│   ├── recette_xxx.avif           # Image originale
+│   └── recette_xxx_thumb.avif     # Miniature associée
+│
+├── utilisateur/                # Gestion des comptes utilisateurs
 │   ├── login.php
-│   ├── register.php
-│   └── logout.php
+│   ├── logout.php
+│   └── register.php
 │
-├── includes/                # Business/technical logic (not directly URL-accessible)
-│   ├── db.php                # PDO database connection
-│   ├── lang.php              # Language handling (fr/en)
-│   ├── auth_check.php        # User session check
-│   └── image-utils.php       # Image processing / resizing
-│
-├── lang/                    # Translation files
-│   ├── fr.php
-│   └── en.php
-│
-├── assets/
-│   └── css/
-│       └── style.css
-│
-└── uploads/                 # User-uploaded images
-    └── recettes/
-
+└── IUT/                        # (dossier annexe, hors périmètre du site)
 ```
 
 ## Security
