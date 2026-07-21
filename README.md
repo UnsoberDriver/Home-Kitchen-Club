@@ -1,53 +1,48 @@
-# Home Kitchen Club
+Home Kitchen Club
 
-Site de recettes que j'ai codé en PHP pur pour progresser en dev web (pas de framework, je voulais comprendre ce qui se passe sous le capot). Il y a un espace public pour consulter les recettes, un système de compte, et un dashboard admin pour tout gérer.
+A recipe site I coded in pure PHP to improve my web dev skills (no framework, I wanted to understand what's happening under the hood). There's a public area to browse recipes, an account system, and an admin dashboard to manage everything.
 
-## Ce que ça fait
+What it does
+Recipe list filterable by category, with a detailed page per recipe (ingredients, steps, time, difficulty)
+Live serving adjustment on the recipe page (quantities recalculated in JS)
+User accounts: sign up / log in, with a "stay logged in" option (remember-me secured by token)
+Admin dashboard to create, edit, and delete recipes
+Image upload, automatically converted to AVIF + thumbnail generation
+Contact form in a popup (AJAX, protected by a CSRF token)
+Bilingual FR/EN site, auto-detected based on browser language
+Stack
 
-- Liste de recettes filtrable par catégorie, avec fiche détaillée par recette (ingrédients, étapes, temps, difficulté)
-- Ajustement des portions en direct sur la fiche recette (recalcul des quantités en JS)
-- Comptes utilisateurs : inscription / connexion, avec option "rester connecté" (remember-me sécurisé par token)
-- Dashboard admin pour créer, modifier et supprimer des recettes
-- Upload d'images, converties automatiquement en AVIF + génération de miniatures
-- Formulaire de contact en popup (AJAX, protégé par jeton CSRF)
-- Site bilingue FR/EN, détecté automatiquement selon la langue du navigateur
+Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images go through GD for AVIF conversion (requires PHP 8.1+).
 
-## Stack
-
-PHP natif, MySQL/PDO, HTML/CSS/JS vanilla. Pas de framework, pas de build tool.
-Les images passent par GD pour la conversion AVIF (nécessite PHP 8.1+).
-
-## Structure du projet
-
-```
+Project structure
 homekitchenclub/
-├── public/                  # Racine web (document root)
-│   ├── index.php            # Page d'accueil (liste des recettes)
-│   ├── recette.php          # Détail d'une recette
-│   ├── contact.php          # Formulaire de contact
-│   ├── contact_envoyer.php  # Traitement du formulaire de contact
+├── public/                  # Web root (document root)
+│   ├── index.php            # Home page (recipe list)
+│   ├── recette.php          # Recipe detail page
+│   ├── contact.php          # Contact form
+│   ├── contact_envoyer.php  # Contact form handler
 │   ├── mentions-legales.php
 │   ├── .htaccess
 │   ├── logo.png
 │   └── logo-navbar.svg
 │
-├── admin/                   # Gestion des recettes (espace connecté)
+├── admin/                   # Recipe management (logged-in area)
 │   ├── dashboard.php
 │   ├── ajouter.php
 │   └── modifier.php
 │
-├── utilisateur/             # Authentification
+├── utilisateur/             # Authentication
 │   ├── login.php
 │   ├── register.php
 │   └── logout.php
 │
-├── includes/                # Logique métier / technique (non accessible en URL directe)
-│   ├── db.php                # Connexion PDO à la base de données
-│   ├── lang.php              # Gestion de la langue (fr/en)
-│   ├── auth_check.php        # Vérification de session utilisateur
-│   └── image-utils.php       # Traitement / redimensionnement des images
+├── includes/                # Business/technical logic (not directly URL-accessible)
+│   ├── db.php                # PDO database connection
+│   ├── lang.php              # Language handling (fr/en)
+│   ├── auth_check.php        # User session check
+│   └── image-utils.php       # Image processing / resizing
 │
-├── lang/                    # Fichiers de traduction
+├── lang/                    # Translation files
 │   ├── fr.php
 │   └── en.php
 │
@@ -55,32 +50,27 @@ homekitchenclub/
 │   └── css/
 │       └── style.css
 │
-└── uploads/                 # Images uploadées par les utilisateurs
+└── uploads/                 # User-uploaded images
     └── recettes/
-```
+Security
 
-## Sécurité
+A few things I put in place while learning about the topic:
 
-Quelques trucs que j'ai mis en place en apprenant le sujet :
+Passwords hashed with password_hash / password_verify
+Prepared SQL statements (PDO) everywhere, no query concatenation
+CSRF protection on sensitive forms (contact, recipe creation/editing)
+"Remember me" cookie based on a hashed selector/validator pair (no plaintext token stored server-side), rotated on every use
+Internationalization
 
-- Mots de passe hashés avec `password_hash` / `password_verify`
-- Requêtes SQL préparées (PDO) partout, pas de concaténation de requêtes
-- Protection CSRF sur les formulaires sensibles (contact, création/édition de recette)
-- Cookie "remember me" basé sur un couple sélecteur/validateur hashé (pas de token en clair côté serveur), avec rotation à chaque utilisation
+The site detects the browser language on first load and displays content in French or English accordingly. The logic lives in lang.php, static text is in fr.php / en.php, and recipes have _en columns in the database with automatic fallback to French if the translation hasn't been filled in yet.
 
-## Internationalisation
+Live
+Site: homekitchenclub.alwaysdata.net
+Legal notice
+Author
 
-Le site détecte la langue du navigateur au premier chargement et affiche le contenu en français ou en anglais en conséquence. La logique est dans `lang.php`, les textes fixes dans `fr.php` / `en.php`, et les recettes ont des colonnes `_en` en base avec repli automatique sur le français si la traduction n'est pas encore renseignée.
+Nicolas Boulloud — LinkedIn
 
-## En ligne
+License
 
-- Site : [homekitchenclub.alwaysdata.net](https://homekitchenclub.alwaysdata.net/)
-- [Mentions légales](https://homekitchenclub.alwaysdata.net/mentions-legales)
-
-## Auteur
-
-Nicolas Boulloud — [LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
-
-## Licence
-
-© 2026 Nicolas Boulloud. Tous droits réservés.
+© 2026 Nicolas Boulloud. All rights reserved.
