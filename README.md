@@ -42,15 +42,14 @@ www/
     │   ├── logout.php
     │   └── register.php
     │
+    ├── admin/                     # Back-office d'administration
+    │   ├── ajouter.php            # Ajout d'une nouvelle recette
+    │   ├── dashboard.php          # Tableau de bord admin
+    │   └── modifier.php           # Modification d'une recette existante
+    │
     ├── .htaccess              # Réécriture d'URL, sécurité, cache navigateur
     ├── logo.png               # Favicon / logo
     ├── logo-navbar.svg        # Logo affiché dans le header
-    │
-    ├── admin/                     # Back-office d'administration
-    ├── ajouter.php            # Ajout d'une nouvelle recette
-    ├── dashboard.php          # Tableau de bord admin
-    └── modifier.php           # Modification d'une recette existante
-    │
     ├── index.php              # Page d'accueil (liste des recettes)
     ├── recette.php            # Page détail d'une recette
     ├── contact.php            # Page de contact (formulaire)
