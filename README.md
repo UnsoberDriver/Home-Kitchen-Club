@@ -74,7 +74,7 @@ The site detects the browser language on first load and displays content in Fren
 
 ## Live
 
-* Site: [homekitchenclub.alwaysdata.net](https://homekitchenclub.alwaysdata.net/)
+* [homekitchenclub.alwaysdata.net](https://homekitchenclub.alwaysdata.net/)
 
 ## Legal notices
 * [Legal notice](https://homekitchenclub.alwaysdata.net/mentions-legales)
