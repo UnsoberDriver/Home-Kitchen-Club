@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/lang.php';
+require_once __DIR__ . '/includes/lang.php';
 
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
@@ -13,7 +13,7 @@ if (empty($_SESSION['csrf'])) {
 <title><?= __('mentions_titre') ?> — Home Kitchen Club</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/style.css">
 <style>
   html,body{height:100%}
   body{display:flex;flex-direction:column;min-height:100vh}

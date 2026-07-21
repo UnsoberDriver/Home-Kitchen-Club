@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../includes/db.php';
-require_once __DIR__ . '/../includes/lang.php';
+require_once __DIR__ . '/includes/lang.php';
+require_once __DIR__ . '/includes/db.php';
+
 
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(32));
@@ -44,9 +45,9 @@ if ($categorie_active > 0) {
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap"></noscript>
 
 <!-- Preload style.css to shorten the critical chain, load it non-blocking -->
-<link rel="preload" href="style.css" as="style">
-<link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="style.css"></noscript>
+<link rel="preload" href="assets/style.css" as="style">
+<link rel="stylesheet" href="assets/style.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="assets/style.css"></noscript>
 
 <style>
   /* ---- Critical CSS (above-the-fold): header + category strip ---- */
@@ -169,7 +170,7 @@ if ($categorie_active > 0) {
               $thumb_url = preg_replace('/\.avif$/', '_thumb.avif', $r['image_url']);
               $is_first = $i === 0;
             ?>
-              <img src="uploads/<?= htmlspecialchars($thumb_url) ?>" alt="<?= htmlspecialchars(champ_langue($r, 'titre')) ?>"
+              <img src="image?f=<?= urlencode($thumb_url) ?>" alt="<?= htmlspecialchars(champ_langue($r, 'titre')) ?>"
                 <?= $is_first ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"' ?>
                 decoding="async" style="width:100%;height:100%;object-fit:cover">
             <?php else: ?>
