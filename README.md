@@ -32,7 +32,7 @@ www/
 ├── includes/                     # Shared PHP files (DB connection, language handling, etc.)
 │   ├── db.php                    # Database connection (PDO)
 │   ├── lang.php                  # Internationalization handling (FR/EN)
-│   ├── auth_check                # Verifies if an admin is connected
+│   ├── auth_check.php            # Verifies if an admin is connected
 │   └── image-utils.php           # Resizes pictures if necessary
 │
 └── public/                       # Web root (server document root)
