@@ -22,8 +22,8 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 .env                              # Environment variables (DB credentials, secrets) — never committed
 www/
 │
-├── uploads/                      # Recipe images (outside the document root, not directly accessible)
-│   └── images.avif               # All image
+├── uploads/                      # All images (outside of the document root)
+│   └── images.avif
 │
 └── public/                       # Web root (server document root)
     ├── assets/
@@ -31,7 +31,9 @@ www/
     │
     ├── includes/                 # Shared PHP files (DB connection, language handling, etc.)
     │   ├── db.php                # Database connection (PDO)
-    │   └── lang.php              # Internationalization handling (FR/EN)
+    │   ├── lang.php              # Internationalization handling (FR/EN)
+    │   ├── auth_check            # Verifies if an admin is connected
+    │   └── image-utils.php       # Allows access to pictures
     │
     ├── lang/                     # Translation files
     │   ├── en.php                # English translations
@@ -54,8 +56,6 @@ www/
     ├── .htaccess                 # URL rewriting, security, browser caching
     ├── index.php                 # Home page (recipe listing)
     ├── recette.php               # Recipe detail page
-    ├── contact.php               # Contact page (form)
-    ├── contact_envoyer.php       # AJAX handler for the contact form
     ├── mentions-legales.php      # Legal notice page
     └── image.php                 # Secure proxy serving images from the uploads/ folder
 ```
