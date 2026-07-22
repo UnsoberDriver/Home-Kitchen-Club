@@ -23,7 +23,7 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 www/
 │
 ├── uploads/                      # Recipe images (outside the document root, not directly accessible)
-│   └── images.avif               # Thumbnail image
+│   └── images.avif               # All image
 │
 └── public/                       # Web root (server document root)
     ├── assets/
