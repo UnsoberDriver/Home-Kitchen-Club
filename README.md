@@ -64,7 +64,6 @@ www/
     │   └── modifier.php          # Edit an existing recipe
     │
     ├── .htaccess                 # URL rewriting, security, browser caching
-    │
     └── index.php                 # Home page (recipe listing)
 ```
 ## Security
