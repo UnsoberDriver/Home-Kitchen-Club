@@ -22,8 +22,8 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 .env                              # Environment variables (DB credentials, secrets) — never committed
 www/
 │
-├── uploads/                      # All images (outside of the document root)
-│   └── images.avif
+├── uploads/                      # All pictures (outside of the document root)
+│   └── pictures.avif
 │
 ├── lang/                         # Translation files
 │   ├── en.php                    # English translations
