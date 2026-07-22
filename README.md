@@ -25,20 +25,20 @@ www/
 ├── uploads/                      # All images (outside of the document root)
 │   └── images.avif
 │
+├── lang/                     # Translation files
+│   ├── en.php                # English translations
+│   └── fr.php                # French translations
+│
+├── includes/                 # Shared PHP files (DB connection, language handling, etc.)
+│   ├── db.php                # Database connection (PDO)
+│   ├── lang.php              # Internationalization handling (FR/EN)
+│   ├── auth_check            # Verifies if an admin is connected
+│   └── image-utils.php       # Resizes pictures if necessary
+│
 └── public/                       # Web root (server document root)
     │
     ├── assets/
     │   └── style.css             # Main stylesheet
-    │
-    ├── includes/                 # Shared PHP files (DB connection, language handling, etc.)
-    │   ├── db.php                # Database connection (PDO)
-    │   ├── lang.php              # Internationalization handling (FR/EN)
-    │   ├── auth_check            # Verifies if an admin is connected
-    │   └── image-utils.php       # Resizes pictures if necessary
-    │
-    ├── lang/                     # Translation files
-    │   ├── en.php                # English translations
-    │   └── fr.php                # French translations
     │
     ├── user/                     # User account management
     │   ├── login.php
