@@ -33,7 +33,7 @@ www/
     │   ├── db.php                # Database connection (PDO)
     │   ├── lang.php              # Internationalization handling (FR/EN)
     │   ├── auth_check            # Verifies if an admin is connected
-    │   └── image-utils.php       # Allows access to pictures
+    │   └── image-utils.php       # Resizes pictures if necessary
     │
     ├── lang/                     # Translation files
     │   ├── en.php                # English translations
