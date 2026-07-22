@@ -25,20 +25,33 @@ www/
 ├── uploads/                      # All images (outside of the document root)
 │   └── images.avif
 │
-├── lang/                     # Translation files
-│   ├── en.php                # English translations
-│   └── fr.php                # French translations
+├── lang/                         # Translation files
+│   ├── en.php                    # English translations
+│   └── fr.php                    # French translations
 │
-├── includes/                 # Shared PHP files (DB connection, language handling, etc.)
-│   ├── db.php                # Database connection (PDO)
-│   ├── lang.php              # Internationalization handling (FR/EN)
-│   ├── auth_check            # Verifies if an admin is connected
-│   └── image-utils.php       # Resizes pictures if necessary
+├── includes/                     # Shared PHP files (DB connection, language handling, etc.)
+│   ├── db.php                    # Database connection (PDO)
+│   ├── lang.php                  # Internationalization handling (FR/EN)
+│   ├── auth_check                # Verifies if an admin is connected
+│   └── image-utils.php           # Resizes pictures if necessary
 │
 └── public/                       # Web root (server document root)
     │
-    ├── assets/
-    │   └── style.css             # Main stylesheet
+    ├── assets/                   # Main stylesheet
+    │   └── style.css
+    │
+    ├── recipes/                  # Recipe detail page
+    │    └── recette.php
+    │
+    ├── picture                   # Home page (recipe listing)
+    │     └── image.php           # Secure proxy serving images from the uploads/ folder
+    │
+    ├── legal-notices/            # Legal notices
+    │   └── mentions-legales
+    │
+    ├── contact/                  # 
+    │   ├── contact.php
+    │   └── contact_envoyer.php
     │
     ├── user/                     # User account management
     │   ├── login.php
@@ -50,15 +63,9 @@ www/
     │   ├── dashboard.php         # Admin dashboard
     │   └── modifier.php          # Edit an existing recipe
     │
-    ├── contact/                  # Admin back-office
-    │   ├── contact.php           # Add a new recipe
-    │   └── contact_envoyer.php   # Admin dashboard
-    │
     ├── .htaccess                 # URL rewriting, security, browser caching
-    ├── index.php                 # Home page (recipe listing)
-    ├── recette.php               # Recipe detail page
-    ├── mentions-legales.php      # Legal notice page
-    └── image.php                 # Secure proxy serving images from the uploads/ folder
+    │
+    └── index.php                 # Home page (recipe listing)
 ```
 ## Security
 
