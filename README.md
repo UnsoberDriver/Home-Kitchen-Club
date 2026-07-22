@@ -26,6 +26,7 @@ www/
 │   └── images.avif
 │
 └── public/                       # Web root (server document root)
+    │
     ├── assets/
     │   └── style.css             # Main stylesheet
     │
