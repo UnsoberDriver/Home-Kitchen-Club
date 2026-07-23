@@ -19,52 +19,53 @@ Native PHP, MySQL/PDO, vanilla HTML/CSS/JS. No framework, no build tool. Images 
 ## Project structure
 
 ```
-.env                              # Environment variables (DB credentials, secrets) — never committed
-www/
-│
-├── uploads/                      # All pictures (outside of the document root)
-│   └── pictures.avif
-│
-├── lang/                         # Translation files
-│   ├── en.php                    # English translations
-│   └── fr.php                    # French translations
-│
-├── includes/                     # Shared PHP files (DB connection, language handling, etc.)
-│   ├── db.php                    # Database connection (PDO)
-│   ├── lang.php                  # Internationalization handling (FR/EN)
-│   ├── auth_check.php            # Verifies if an admin is connected
-│   └── image-utils.php           # Resizes pictures if necessary
-│
-└── public/                       # Web root (server document root)
+/
+├── .env                          # Environment variables (DB credentials, secrets) — never committed
+└── www/
     │
-    ├── assets/                   # Main stylesheet
-    │   └── style.css
+    ├── uploads/                  # All pictures (outside of the document root)
+    │   └── pictures.avif
     │
-    ├── recipes/                  # Recipe detail page
-    │    └── recette.php
+    ├── lang/                     # Translation files
+    │   ├── en.php                # English translations
+    │   └── fr.php                # French translations
     │
-    ├── picture                   # Home page (recipe listing)
-    │     └── image.php           # Secure proxy serving images from the uploads/ folder
+    ├── includes/                 # Shared PHP files (DB connection, language handling, etc.)
+    │   ├── db.php                # Database connection (PDO)
+    │   ├── lang.php              # Internationalization handling (FR/EN)
+    │   ├── auth_check.php        # Verifies if an admin is connected
+    │   └── image-utils.php       # Resizes pictures if necessary
     │
-    ├── legal-notices/            # Legal notices
-    │   └── mentions-legales
-    │
-    ├── contact/                  # 
-    │   ├── contact.php
-    │   └── contact_envoyer.php
-    │
-    ├── user/                     # User account management
-    │   ├── login.php
-    │   ├── logout.php
-    │   └── register.php
-    │
-    ├── admin/                    # Admin back-office
-    │   ├── ajouter.php           # Add a new recipe
-    │   ├── dashboard.php         # Admin dashboard
-    │   └── modifier.php          # Edit an existing recipe
-    │
-    ├── .htaccess                 # URL rewriting, security, browser caching
-    └── index.php                 # Home page (recipe listing)
+    └── public/                   # Web root (server document root)
+        │
+        ├── assets/               # Main stylesheet
+        │   └── style.css
+        │
+        ├── recipes/              # Recipe detail page
+        │   └── recette.php
+        │
+        ├── picture/
+        │   └── image.php         # Secure proxy serving images from the uploads/ folder
+        │
+        ├── legal-notices/        # Legal notices
+        │   └── mentions-legales
+        │
+        ├── contact/
+        │   ├── contact.php
+        │   └── contact_envoyer.php
+        │
+        ├── user/                 # User account management
+        │   ├── login.php
+        │   ├── logout.php
+        │   └── register.php
+        │
+        ├── admin/                # Admin back-office
+        │   ├── ajouter.php       # Add a new recipe
+        │   ├── dashboard.php     # Admin dashboard
+        │   └── modifier.php      # Edit an existing recipe
+        │
+        ├── .htaccess              # URL rewriting, security, browser caching
+        └── index.php              # Home page (recipe listing)
 ```
 ## Security
 
