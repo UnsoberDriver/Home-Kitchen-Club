@@ -93,4 +93,8 @@ Nicolas Boulloud — [LinkedIn](https://www.linkedin.com/in/nicolas-boulloud/)
 
 ## License
 
-© 2026 Nicolas Boulloud. All rights reserved.
+This project is proprietary — all rights reserved. See the LICENSE file for details.
+
+See also NOTICE.md for additional usage restrictions (including AI training).
+
+© 2026 Nicolas Boulloud.
