@@ -1,0 +1,74 @@
+<?php
+/**
+ * contact_envoyer.php — endpoint AJAX appelé par la popup "Nous contacter"
+ * Retourne toujours du JSON : { "success": bool, "message": string }
+ */
+
+require_once __DIR__ . '/db.php';
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+header('Content-Type: application/json; charset=utf-8');
+
+function repondre(bool $success, string $message): void
+{
+    echo json_encode(['success' => $success, 'message' => $message]);
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    repondre(false, "Méthode non autorisée.");
+}
+
+if (!hash_equals($_SESSION['csrf'] ?? '', $_POST['csrf'] ?? '')) {
+    repondre(false, "Jeton de sécurité invalide, veuillez recharger la page.");
+}
+
+$nom = trim($_POST['nom'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$sujet = trim($_POST['sujet'] ?? '');
+$texte = trim($_POST['message'] ?? '');
+
+// Anti-spam : max 3 envois / 10 min par IP
+$ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+$pdo->exec("
+    CREATE TABLE IF NOT EXISTS contact_envois (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        ip VARCHAR(45) NOT NULL,
+        envoye_le DATETIME NOT NULL,
+        INDEX (ip, envoye_le)
+    )
+");
+$fenetre = date('Y-m-d H:i:s', time() - 10 * 60);
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM contact_envois WHERE ip = ? AND envoye_le > ?");
+$stmt->execute([$ip, $fenetre]);
+if ((int) $stmt->fetchColumn() >= 3) {
+    repondre(false, "Trop de messages envoyés. Merci de réessayer dans quelques minutes.");
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    repondre(false, "Adresse email invalide.");
+}
+if ($texte === '') {
+    repondre(false, "Le message ne peut pas être vide.");
+}
+if (mb_strlen($texte) > 5000) {
+    repondre(false, "Le message est trop long (5000 caractères maximum).");
+}
+
+$stmt = $pdo->prepare("
+    INSERT INTO messages_contact (nom, email, sujet, message)
+    VALUES (?, ?, ?, ?)
+");
+$stmt->execute([
+    $nom !== '' ? $nom : null,
+    $email,
+    $sujet !== '' ? $sujet : null,
+    $texte,
+]);
+
+$pdo->prepare("INSERT INTO contact_envois (ip, envoye_le) VALUES (?, NOW())")->execute([$ip]);
+
+repondre(true, "Votre message a bien été envoyé. Merci, nous reviendrons vers vous rapidement.");
