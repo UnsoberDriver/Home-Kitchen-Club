@@ -30,28 +30,129 @@ php -r "var_dump(gd_info()['AVIF Support']);"
 
 ## Installation
 
+Pick your system: [Linux](#linux-debian--ubuntu) or [Windows](#windows-xampp). Then fill in `.env` (see [Configuration](#configuration)) and [create an admin account](#creating-an-admin-account).
+
+### Linux (Debian / Ubuntu)
+
+**1. Install the web stack**
+
 ```bash
-git clone https://github.com/UnsoberDriver/HomeKitchenClub
-cd HomeKitchenClub
-cp .env.example .env      # Windows: copy .env.example .env
+sudo apt update
+sudo apt install git apache2 php php-mysql php-gd mariadb-server
+sudo a2enmod rewrite
 ```
 
-1. **Configure** `.env` (see [Configuration](#configuration)).
-2. **Create the database** and import the schema:
-   ```bash
-   mysql -u root -p -e "CREATE DATABASE homekitchenclub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
-   mysql -u root -p homekitchenclub < database/schema.sql
-   ```
-3. **Make the uploads folder writable** by the web server:
-   ```bash
-   mkdir -p www/uploads
-   chmod 775 www/uploads
-   ```
-4. **Point the web server's document root to `www/public/`**. Everything else (`includes/`, `lang/`, `uploads/`, `.env`) must stay outside of it.
-5. **Quick local test** with PHP's built-in server (note: `.htaccess` rules are ignored, so clean URLs won't work):
-   ```bash
-   php -S localhost:8000 -t www/public
-   ```
+**2. Get the code and create the config**
+
+```bash
+cd /var/www
+sudo git clone https://github.com/UnsoberDriver/HomeKitchenClub
+cd HomeKitchenClub
+sudo cp .env.example .env
+sudo chown root:www-data .env && sudo chmod 640 .env
+```
+
+**3. Create the database and a dedicated user**
+
+```bash
+sudo mysql -e "CREATE DATABASE homekitchenclub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+sudo mysql -e "CREATE USER 'hkc'@'localhost' IDENTIFIED BY 'change-me'; GRANT ALL ON homekitchenclub.* TO 'hkc'@'localhost'; FLUSH PRIVILEGES;"
+sudo mysql homekitchenclub < database/schema.sql
+```
+
+Put `hkc` and your password in `.env` (`DB_USER`, `DB_PASSWORD`).
+
+**4. Make the uploads folder writable**
+
+```bash
+sudo mkdir -p www/uploads
+sudo chown -R www-data:www-data www/uploads
+sudo chmod 775 www/uploads
+```
+
+**5. Point Apache to `www/public`**
+
+Create `/etc/apache2/sites-available/homekitchenclub.conf`:
+
+```apache
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot /var/www/HomeKitchenClub/www/public
+    <Directory /var/www/HomeKitchenClub/www/public>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+Enable it:
+
+```bash
+sudo a2dissite 000-default
+sudo a2ensite homekitchenclub
+sudo systemctl reload apache2
+```
+
+The site is available at `http://localhost`.
+
+### Windows (XAMPP)
+
+**1. Install the web stack**
+
+Install [XAMPP](https://www.apachefriends.org) (PHP 8.1+, Apache, MariaDB) and [Git](https://git-scm.com). Start **Apache** and **MySQL** from the XAMPP Control Panel. `mod_rewrite` is enabled by default.
+
+**2. Get the code and create the config** (PowerShell)
+
+```powershell
+git clone https://github.com/UnsoberDriver/HomeKitchenClub C:\HomeKitchenClub
+cd C:\HomeKitchenClub
+copy .env.example .env
+```
+
+**3. Create the database**
+
+1. Open `http://localhost/phpmyadmin`.
+2. Create a database named `homekitchenclub` (collation `utf8mb4_unicode_ci`).
+3. Select it, open the **Import** tab and choose `database\schema.sql`.
+
+With XAMPP's defaults, set `DB_USER=root` and leave `DB_PASSWORD` empty in `.env`.
+
+**4. Point Apache to `www\public`**
+
+Open `C:\xampp\apache\conf\extra\httpd-vhosts.conf` and add:
+
+```apache
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot "C:/HomeKitchenClub/www/public"
+    <Directory "C:/HomeKitchenClub/www/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+Make sure `httpd.conf` contains `Include conf/extra/httpd-vhosts.conf` (uncommented), then restart Apache from the Control Panel.
+
+The `www\uploads` folder is created automatically on first upload (create it manually if not). No permission change is needed on Windows.
+
+The site is available at `http://localhost`.
+
+**Check AVIF support:**
+
+```powershell
+C:\xampp\php\php.exe -r "var_dump(gd_info()['AVIF Support']);"
+```
+
+If it prints `bool(false)`, install a newer PHP build.
+
+### Quick test without Apache (any OS)
+
+```bash
+php -S localhost:8000 -t www/public
+```
+
+`.htaccess` rules are ignored in this mode, so clean URLs (without `.php`) won't work.
 
 ## Configuration
 
